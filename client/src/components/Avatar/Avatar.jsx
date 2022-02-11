@@ -1,23 +1,20 @@
-import React from "react";
+import React from 'react'
 
-const Avatar = ({children, backgroundColor,
-    py,px,
-    color,
-    borderRadius,
-    fontSize,
-    cursor }) => {
-    const style={
+const Avatar = ({ children, backgroundColor, px, py, color, borderRadius, fontSize, cursor}) => {
+    const style = {
         backgroundColor,
-        color:color || "black",
+        padding: `${py} ${px}`,
+        color: color || 'black',
         borderRadius,
         fontSize,
         textAlign: "center",
-        cursor:cursor || null,
-        
+        cursor: cursor || null,
+        textDecoration: "none"
     }
+
     return (
         <div style={style}>
-            {children}
+            { children }
         </div>
     )
 }
