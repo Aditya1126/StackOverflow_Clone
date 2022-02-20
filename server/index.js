@@ -1,30 +1,23 @@
-import express from 'express'
-import mongoose from 'mongoose'
-import cors from 'cors'
-import dotenv from 'dotenv'
-
-import userRoutes from './routes/users.js'
-import questionRoutes from './routes/Questions.js'
-import answerRoutes from './routes/Answers.js'
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import userRoutes from './routes/user.js';
 
 const app = express();
-dotenv.config();
-app.use(express.json({limit: "30mb", extended: true}))
-app.use(express.urlencoded({limit: "30mb", extended: true}))
+app.use(express.json({limit:"30mb", extended:true}));
+app.use(express.urlencoded({limit:"30mb", extended:true}));
 app.use(cors());
 
-app.get('/',(req, res) => {
-    res.send("This is a stack overflow clone API")
+app.get('/', (req, res) => {
+res.send("This is the stackoverflow API")
 })
 
-app.use('/user', userRoutes)
-app.use('/questions', questionRoutes)
-app.use('/answer', answerRoutes)
+app.use('/user',userRoutes);
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT ||5000
 
-const DATABASE_URL = process.env.CONNECTION_URL
+const CONNECTION_URL= "mongodb+srv://admin:admin@stackoverflow.hjfyv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-mongoose.connect( DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => app.listen(PORT, () => {console.log(`server running on port ${PORT}`)}))
-    .catch((err) => console.log(err.message))
+mongoose.connect(CONNECTION_URL,{useNewUrlParser:true, useUnifiedTopology:true})
+        .then(() => app.listen(PORT,() => {console.log(`server is running on ${PORT}`)}))
+        .catch((err) => console.log(err.message))
